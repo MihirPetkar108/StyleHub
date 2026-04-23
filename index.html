@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>StyleHub | Online Shopping</title>
+        <link rel="stylesheet" href="index.css" />
+        <link
+            href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css"
+            rel="stylesheet"
+        />
+        <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+    </head>
+    <body>
+        <header class="topbar">
+            <div class="brand">
+                <a
+                    href="index.html"
+                    class="brand-link"
+                    aria-label="StyleHub home"
+                >
+                    <!-- SVG -->
+                    <svg
+                        class="logo-svg"
+                        width="320"
+                        height="100"
+                        viewBox="0 0 320 100"
+                    >
+                        <defs>
+                            <linearGradient
+                                id="grad"
+                                x1="0%"
+                                y1="0%"
+                                x2="100%"
+                                y2="100%"
+                            >
+                                <stop offset="0%" stop-color="#38bdf8" />
+                                <stop offset="100%" stop-color="#6366f1" />
+                            </linearGradient>
+                        </defs>
+
+                        <circle
+                            cx="50"
+                            cy="20"
+                            r="90px"
+                            fill="url(#grad)"
+                            class="glow-circle"
+                        />
+                        <text
+                            x="50"
+                            y="62"
+                            text-anchor="middle"
+                            font-size="120"
+                            fill="white"
+                            font-weight="bold"
+                        >
+                            S
+                        </text>
+                        <text x="200" y="72" class="logo-text">
+                            Style
+                            <tspan class="highlight">Hub</tspan>
+                        </text>
+                    </svg>
+                </a>
+            </div>
+            <div class="search">
+                <input
+                    type="text"
+                    placeholder="Search for products, brands and more"
+                />
+            </div>
+            <div class="auth-area" id="authArea">
+                <span id="authUser">Guest</span>
+                <span class="pipe">|</span>
+                <a href="./signup.html" id="signoutLink"><b>Sign out</b></a>
+                <span class="pipe">|</span>
+                <b id="cart">Cart</b>
+            </div>
+        </header>
+
+        <nav class="nav-bar">
+            <a class="nav-item" href="men.html"><b>Men</b></a>
+            <a class="nav-item" href="women.html"><b>Women</b></a>
+            <a class="nav-item" href="kids.html"><b>Kids</b></a>
+            <a class="nav-item" href="footwear.html"><b>Footwear</b></a>
+            <a class="nav-item" href="accessories.html"><b>Accessories</b></a>
+            <a class="nav-item" href="offers.html"><b>Offers</b></a>
+        </nav>
+
+        <main class="main-container">
+            <div class="section-title">
+                <h2>Best Deals on Fashion</h2>
+            </div>
+
+            <div class="product-grid">
+                <div class="product-card bg-light">
+                    <img src="./images/MensShirt.webp" alt="Men's T-Shirt" />
+                    <div class="details">
+                        <b>Men's T-Shirt</b><br />₹499<br />⭐⭐⭐⭐☆
+                    </div>
+                    <button class="buy-now-btn" onclick="buyNow('Men T-Shirt')">
+                        Buy Now
+                    </button>
+                </div>
+                <div class="product-card bg-light">
+                    <img src="./images/womenshirt.jpeg" alt="Women's Dress" />
+                    <div class="details">
+                        <b>Women's Dress</b><br />₹899<br />⭐⭐⭐⭐⭐
+                    </div>
+                    <button class="buy-now-btn" onclick="buyNow('Women Dress')">
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-light">
+                    <img src="./images/shoes/Nike_Air.png" alt="Nike Air" />
+                    <div class="details">
+                        <b>Nike Air</b><br />₹2439<br />⭐⭐⭐⭐☆
+                    </div>
+                    <button class="buy-now-btn" onclick="buyNow('Nike Air')">
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-white">
+                    <img
+                        src="./images/accessories/Matrix_Watch.png"
+                        alt="Matrix Watch"
+                    />
+                    <div class="details"><b>Matrix Watch</b><br />₹24598</div>
+                    <button
+                        class="buy-now-btn"
+                        onclick="buyNow('Matrix Watch')"
+                    >
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-white">
+                    <img
+                        src="./images/kids/Kids_White_Yellow.png"
+                        alt="Kids_White_Yellow"
+                    />
+                    <div class="details">
+                        <b>Kids_White_Yellow</b><br />₹652
+                    </div>
+                    <button
+                        class="buy-now-btn"
+                        onclick="buyNow('Kids_White_Yellow')"
+                    >
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-light">
+                    <img src="./images/jacket.jpeg" alt="Denim Jacket" />
+                    <div class="details">
+                        <b>Denim Jacket</b><br />₹1299<br />⭐⭐⭐⭐☆
+                    </div>
+                    <button
+                        class="buy-now-btn"
+                        onclick="buyNow('Denim Jacket')"
+                    >
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-light">
+                    <img src="./images/shoes.jpeg" alt="Casual Shoes" />
+                    <div class="details">
+                        <b>Casual Shoes</b><br />₹1599<br />⭐⭐⭐⭐☆
+                    </div>
+                    <button
+                        class="buy-now-btn"
+                        onclick="buyNow('Casual Shoes')"
+                    >
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-white">
+                    <img
+                        src="./images/kids/Kids_White_Shirt.png"
+                        alt="Kids_White_Shirt"
+                    />
+                    <div class="details"><b>Kids White Shirt</b><br />₹358</div>
+                    <button
+                        class="buy-now-btn"
+                        onclick="buyNow('Kids White Shirt')"
+                    >
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-light">
+                    <img
+                        src="./images/Women_Purple_Kurti.png"
+                        alt="Women's Dress"
+                    />
+                    <div class="details">
+                        <b>Women's Purple Dress</b><br />₹945<br />⭐⭐⭐⭐⭐
+                    </div>
+                    <button
+                        class="buy-now-btn"
+                        onclick="buyNow('Women Purple Dress')"
+                    >
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-light">
+                    <img src="./images/ethnicClothe.jpeg" alt="Ethnic Kurta" />
+                    <div class="details">
+                        <b>Ethnic Kurta</b><br />₹999<br />⭐⭐⭐⭐⭐
+                    </div>
+                    <button
+                        class="buy-now-btn"
+                        onclick="buyNow('Ethnic Kurta')"
+                    >
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-white">
+                    <img src="./images/kids/Kids_Frock.png" alt="Kids Frock" />
+                    <div class="details"><b>Kids Frock</b><br />₹842</div>
+                    <button class="buy-now-btn" onclick="buyNow('Kids Frock')">
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-light">
+                    <img src="./images/hoodie.jpeg" alt="Stylish Hoodie" />
+                    <div class="details">
+                        <b>Stylish Hoodie</b><br />₹1199<br />⭐⭐⭐⭐☆
+                    </div>
+                    <button
+                        class="buy-now-btn"
+                        onclick="buyNow('Stylish Hoodie')"
+                    >
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-light">
+                    <img src="./images/shoes/Addidas.png" alt="Addidas" />
+                    <div class="details">
+                        <b>Addidas</b><br />₹1654<br />⭐⭐⭐⭐☆
+                    </div>
+                    <button class="buy-now-btn" onclick="buyNow('Addidas')">
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-light">
+                    <img
+                        src="./images/Women_White_Top.png"
+                        alt="Women's White Dress"
+                    />
+                    <div class="details">
+                        <b>Women's White Dress</b><br />₹1023<br />⭐⭐⭐⭐⭐
+                    </div>
+                    <button
+                        class="buy-now-btn"
+                        onclick="buyNow('Women White Dress')"
+                    >
+                        Buy Now
+                    </button>
+                </div>
+            </div>
+
+            <hr class="divider" />
+
+            <div class="section-title">
+                <h2>Trending Now</h2>
+            </div>
+
+            <div class="product-grid bg-alt">
+                <div class="product-card bg-white">
+                    <img
+                        src="./images/printedShirt.jpeg"
+                        alt="Printed Shirts"
+                    />
+                    <div class="details"><b>Printed Shirts</b><br />₹699</div>
+                    <button
+                        class="buy-now-btn"
+                        onclick="buyNow('Printed Shirts')"
+                    >
+                        Buy Now
+                    </button>
+                </div>
+                <div class="product-card bg-white">
+                    <img src="./images/joggers.jpeg" alt="Joggers" />
+                    <div class="details"><b>Joggers</b><br />₹899</div>
+                    <button class="buy-now-btn" onclick="buyNow('Joggers')">
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-white">
+                    <img
+                        src="./images/accessories/Brown_Wallet.png"
+                        alt="Brown Wallet"
+                    />
+                    <div class="details"><b>Brown Wallet</b><br />₹1034</div>
+                    <button
+                        class="buy-now-btn"
+                        onclick="buyNow('Brown Wallet')"
+                    >
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-white">
+                    <img
+                        src="./images/kids/Kids_Black_and_Brown.png"
+                        alt="Kids Black and Brown"
+                    />
+                    <div class="details"><b>Black Shirt</b><br />₹764</div>
+                    <button class="buy-now-btn" onclick="buyNow('Black Shirt')">
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-white">
+                    <img src="./images/wallet.jpeg" alt="Leather Wallets" />
+                    <div class="details"><b>Leather Wallets</b><br />₹599</div>
+                    <button
+                        class="buy-now-btn"
+                        onclick="buyNow('Leather Wallets')"
+                    >
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-light">
+                    <img
+                        src="./images/Women_Full_Wear.png"
+                        alt="Women's Full Dress"
+                    />
+                    <div class="details">
+                        <b>Women's Full Dress</b><br />₹945<br />⭐⭐⭐⭐⭐
+                    </div>
+                    <button
+                        class="buy-now-btn"
+                        onclick="buyNow('Women Full Dress')"
+                    >
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-white">
+                    <img
+                        src="./images/kids/Kids_Ethnic_Wear.png"
+                        alt="Kids Ethnic Wear"
+                    />
+                    <div class="details"><b>Kids Ethnic Wear</b><br />₹532</div>
+                    <button
+                        class="buy-now-btn"
+                        onclick="buyNow('Kids Ethnic Wear')"
+                    >
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-white">
+                    <img
+                        src="./images/accessories/AP_Watch.png"
+                        alt="AP Watch"
+                    />
+                    <div class="details"><b>AP Watch</b><br />₹342747</div>
+                    <button class="buy-now-btn" onclick="buyNow('AP Watch')">
+                        Buy Now
+                    </button>
+                </div>
+
+                <div class="product-card bg-light">
+                    <img
+                        src="./images/shoes/Nike_Air_Max.png"
+                        alt="Nike Air Max"
+                    />
+                    <div class="details">
+                        <b>Nike Air Max</b><br />₹1654<br />⭐⭐⭐⭐☆
+                    </div>
+                    <button
+                        class="buy-now-btn"
+                        onclick="buyNow('Nike Air Max')"
+                    >
+                        Buy Now
+                    </button>
+                </div>
+            </div>
+
+            <hr class="divider" />
+
+            <div class="reviews">
+                <h2>Customer Reviews</h2>
+                <p>⭐⭐⭐⭐⭐ “Excellent quality and fast delivery” - Rahul</p>
+                <p>
+                    ⭐⭐⭐⭐ “Very good collection at reasonable prices” - Aditi
+                </p>
+                <p>
+                    ⭐⭐⭐⭐⭐ “Just like Flipkart shopping experience” - Neha
+                </p>
+            </div>
+        </main>
+
+        <hr />
+
+        <section class="map-section">
+            <div class="section-title">
+                <h2>Find Our Stores</h2>
+                <p style="text-align: center; color: #555; margin-top: -10px">
+                    Explore StyleHub store locations near you
+                </p>
+            </div>
+            <div id="map"></div>
+        </section>
+
+        <script src="json-utils.js"></script>
+        <script src="map.js"></script>
+        <script src="auth.js"></script>
+    </body>
+</html>

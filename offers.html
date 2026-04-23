@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>StyleHub — Offers</title>
+        <link rel="stylesheet" href="index.css" />
+    </head>
+    <body>
+        <header class="topbar">
+            <div class="brand">
+                <a
+                    href="index.html"
+                    class="brand-link"
+                    aria-label="StyleHub home"
+                >
+                    <!-- SVG -->
+                    <svg
+                        class="logo-svg"
+                        width="320"
+                        height="100"
+                        viewBox="0 0 320 100"
+                    >
+                        <defs>
+                            <linearGradient
+                                id="grad"
+                                x1="0%"
+                                y1="0%"
+                                x2="100%"
+                                y2="100%"
+                            >
+                                <stop offset="0%" stop-color="#38bdf8" />
+                                <stop offset="100%" stop-color="#6366f1" />
+                            </linearGradient>
+                        </defs>
+
+                        <circle
+                            cx="50"
+                            cy="20"
+                            r="90px"
+                            fill="url(#grad)"
+                            class="glow-circle"
+                        />
+                        <text
+                            x="50"
+                            y="62"
+                            text-anchor="middle"
+                            font-size="120"
+                            fill="white"
+                            font-weight="bold"
+                        >
+                            S
+                        </text>
+                        <text x="200" y="72" class="logo-text">
+                            Style
+                            <tspan class="highlight">Hub</tspan>
+                        </text>
+                    </svg>
+                </a>
+            </div>
+            <div class="search">
+                <input
+                    type="text"
+                    placeholder="Search for products, brands and more"
+                />
+            </div>
+            <div class="auth-area" id="authArea">
+                <span id="authUser"><b>Guest</b></span> |
+                <a href="./signup.html" id="signoutLink"><b>Sign out</b></a> |
+                <b id="cart">Cart</b>
+            </div>
+        </header>
+
+        <nav class="nav-bar">
+            <a class="nav-item" href="men.html"><b>Men</b></a>
+            <a class="nav-item" href="women.html"><b>Women</b></a>
+            <a class="nav-item" href="kids.html"><b>Kids</b></a>
+            <a class="nav-item" href="footwear.html"><b>Footwear</b></a>
+            <a class="nav-item" href="accessories.html"><b>Accessories</b></a>
+            <a class="nav-item" href="offers.html"><b>Offers</b></a>
+        </nav>
+
+        <main class="main-container">
+            <div class="section-title">
+                <h2>Offers</h2>
+                <p style="text-align: center; color: #555">
+                    Check back regularly for new discounts and deals.
+                </p>
+            </div>
+        </main>
+
+        <script src="auth.js"></script>
+    </body>
+</html>

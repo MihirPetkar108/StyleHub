@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Your Location | StyleHub</title>
+        <link rel="stylesheet" href="index.css" />
+        <link
+            href="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.css"
+            rel="stylesheet"
+        />
+        <script src="https://api.mapbox.com/mapbox-gl-js/v3.3.0/mapbox-gl.js"></script>
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                background: #f1f3f6;
+                font-family: Arial, Helvetica, sans-serif;
+            }
+
+            .geo-header {
+                background: #2874f0;
+                padding: 18px 30px;
+                display: flex;
+                align-items: center;
+                gap: 16px;
+            }
+
+            .geo-header a {
+                color: #fff;
+                text-decoration: none;
+                font-size: 15px;
+                font-weight: 600;
+                opacity: 0.9;
+            }
+
+            .geo-header a:hover {
+                opacity: 1;
+                text-decoration: underline;
+            }
+
+            .geo-header h1 {
+                margin: 0;
+                color: #fff;
+                font-size: 20px;
+                flex: 1;
+                text-align: center;
+            }
+
+            .geo-card {
+                max-width: 900px;
+                margin: 36px auto 20px;
+                background: #fff;
+                border-radius: 14px;
+                box-shadow: 0 4px 24px rgba(99, 102, 241, 0.12);
+                overflow: hidden;
+            }
+
+            .geo-card-header {
+                background: linear-gradient(90deg, #2874f0, #6366f1);
+                padding: 22px 28px;
+                color: #fff;
+            }
+
+            .geo-card-header h2 {
+                margin: 0 0 4px;
+                font-size: 22px;
+            }
+
+            .geo-card-header p {
+                margin: 0;
+                font-size: 14px;
+                opacity: 0.88;
+            }
+
+            .geo-info {
+                display: flex;
+                gap: 20px;
+                padding: 20px 28px;
+                flex-wrap: wrap;
+            }
+
+            .geo-info-box {
+                flex: 1;
+                min-width: 160px;
+                background: #f8fafc;
+                border-radius: 10px;
+                padding: 16px 20px;
+                border: 1px solid #e2e8f0;
+            }
+
+            .geo-info-box label {
+                font-size: 12px;
+                color: #6b7280;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                display: block;
+                margin-bottom: 6px;
+            }
+
+            .geo-info-box span {
+                font-size: 18px;
+                font-weight: 700;
+                color: #1e293b;
+            }
+
+            #geo-map {
+                width: 100%;
+                height: 420px;
+                display: block;
+                position: relative;
+            }
+
+            #view-toggle {
+                position: absolute;
+                top: 10px;
+                right: 45px;
+                z-index: 10;
+                background: #fff;
+                border: none;
+                border-radius: 6px;
+                padding: 8px 14px;
+                font-size: 13px;
+                font-weight: 700;
+                cursor: pointer;
+                box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+                color: #1e293b;
+                transition: background 0.2s;
+            }
+
+            #view-toggle:hover {
+                background: #f1f5f9;
+            }
+
+            .geo-error {
+                text-align: center;
+                padding: 60px 20px;
+                color: #ef4444;
+                font-size: 16px;
+            }
+
+            .back-btn {
+                display: inline-block;
+                margin: 20px auto 40px;
+                padding: 11px 28px;
+                background: linear-gradient(90deg, #2874f0, #1a56c4);
+                color: #fff;
+                font-size: 15px;
+                font-weight: 700;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                text-decoration: none;
+                box-shadow: 0 2px 8px rgba(255, 109, 0, 0.25);
+                transition:
+                    background 0.2s,
+                    transform 0.15s;
+            }
+
+            .back-btn:hover {
+                background: linear-gradient(90deg, #1a56c4, #0d3fa6);
+                transform: translateY(-2px);
+            }
+
+            .back-link-wrap {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="geo-header">
+            <a href="index.html">&larr; Back to StyleHub</a>
+            <h1>Delivery Location</h1>
+        </div>
+
+        <div class="geo-card" id="geoCard">
+            <div class="geo-card-header">
+                <h2 id="productTitle">Order Confirmation</h2>
+                <p>We will deliver to your detected location below.</p>
+            </div>
+
+            <div class="geo-info">
+                <div class="geo-info-box" style="flex: 1">
+                    <label>Delivery Address</label>
+                    <span
+                        id="addressDisplay"
+                        style="
+                            font-size: 14px;
+                            font-weight: 500;
+                            color: #374151;
+                        "
+                        >Fetching address…</span
+                    >
+                </div>
+            </div>
+
+            <div style="position: relative">
+                <div id="geo-map"></div>
+                <button id="view-toggle">Satellite View</button>
+            </div>
+        </div>
+
+        <div class="back-link-wrap">
+            <a class="back-btn" href="index.html">Continue Shopping</a>
+        </div>
+
+        <script>
+            const params = new URLSearchParams(window.location.search);
+            const lat = parseFloat(params.get("lat"));
+            const lng = parseFloat(params.get("lng"));
+            const product = params.get("product") || "Your Order";
+
+            document.getElementById("productTitle").textContent =
+                "Order: " + decodeURIComponent(product);
+
+            if (isNaN(lat) || isNaN(lng)) {
+                document.getElementById("geoCard").innerHTML =
+                    '<div class="geo-error">&#9888;&#65039; No location data found. Please go back and click Buy Now again.</div>';
+            } else {
+                fetch(
+                    "https://nominatim.openstreetmap.org/reverse?lat=" +
+                        lat +
+                        "&lon=" +
+                        lng +
+                        "&format=json",
+                )
+                    .then(function (r) {
+                        return r.json();
+                    })
+                    .then(function (data) {
+                        document.getElementById("addressDisplay").textContent =
+                            data.display_name || "Address not found";
+                    })
+                    .catch(function () {
+                        document.getElementById("addressDisplay").textContent =
+                            "Could not fetch address.";
+                    });
+
+                mapboxgl.accessToken =
+                    "pk.eyJ1IjoibWloaXJwZXRrYXIiLCJhIjoiY21jaHBrNXIxMHoxZTJrbXliMDZpMGRoNCJ9.TfYhG6KMRHfj0lhTfkxhaw";
+
+                const map = new mapboxgl.Map({
+                    container: "geo-map",
+                    style: "mapbox://styles/mapbox/streets-v12",
+                    center: [lng, lat],
+                    zoom: 14,
+                });
+
+                function createMarkerEl() {
+                    const el = document.createElement("div");
+                    const img = document.createElement("img");
+                    img.src = "./images/markerLogo.svg";
+                    img.width = 36;
+                    img.height = 48;
+                    img.style.display = "block";
+                    el.appendChild(img);
+                    el.style.cursor = "pointer";
+                    el.style.width = "36px";
+                    el.style.height = "48px";
+                    return el;
+                }
+
+                new mapboxgl.Marker({
+                    element: createMarkerEl(),
+                    anchor: "bottom",
+                })
+                    .setLngLat([lng, lat])
+                    .setPopup(
+                        new mapboxgl.Popup({ offset: 25 }).setText(
+                            "Your delivery location",
+                        ),
+                    )
+                    .addTo(map);
+
+                map.addControl(new mapboxgl.NavigationControl());
+                map.addControl(new mapboxgl.FullscreenControl());
+
+                var isSatellite = false;
+                var styles = {
+                    streets: "mapbox://styles/mapbox/streets-v12",
+                    satellite: "mapbox://styles/mapbox/satellite-streets-v12",
+                };
+                var toggleBtn = document.getElementById("view-toggle");
+                toggleBtn.addEventListener("click", function () {
+                    isSatellite = !isSatellite;
+                    map.setStyle(
+                        isSatellite ? styles.satellite : styles.streets,
+                    );
+                    toggleBtn.textContent = isSatellite
+                        ? "Streets View"
+                        : "Satellite View";
+
+                    map.once("styledata", function () {
+                        new mapboxgl.Marker({
+                            element: createMarkerEl(),
+                            anchor: "bottom",
+                        })
+                            .setLngLat([lng, lat])
+                            .setPopup(
+                                new mapboxgl.Popup({ offset: 25 }).setText(
+                                    "Your delivery location",
+                                ),
+                            )
+                            .addTo(map);
+                    });
+                });
+            }
+        </script>
+    </body>
+</html>

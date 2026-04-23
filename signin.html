@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>Sign Up</title>
+        <link rel="stylesheet" href="sign_in_up.css" />
+    </head>
+    <body>
+        <div class="signin-brand">
+            <a href="signup.html" class="brand-link">
+                <svg
+                    class="logo-svg"
+                    width="320"
+                    height="100"
+                    viewBox="0 0 320 100"
+                >
+                    <defs>
+                        <linearGradient
+                            id="grad"
+                            x1="0%"
+                            y1="0%"
+                            x2="100%"
+                            y2="100%"
+                        >
+                            <stop offset="0%" stop-color="#38bdf8" />
+                            <stop offset="100%" stop-color="#6366f1" />
+                        </linearGradient>
+                    </defs>
+
+                    <circle
+                        cx="50"
+                        cy="50"
+                        r="35"
+                        fill="url(#grad)"
+                        class="glow-circle"
+                    />
+                    <text
+                        x="50"
+                        y="58"
+                        text-anchor="middle"
+                        font-size="30"
+                        fill="white"
+                        font-weight="bold"
+                    >
+                        S
+                    </text>
+
+                    <text x="100" y="58" class="logo-text">
+                        Style
+                        <tspan class="highlight">Hub</tspan>
+                    </text>
+                </svg>
+            </a>
+        </div>
+
+        <form class="signin-form" id="signinForm">
+            <h2>Sign In</h2>
+
+            <label>Username</label>
+            <input
+                id="si-username"
+                name="username"
+                type="text"
+                placeholder="Your name"
+            />
+            <div class="error-msg" id="si-username-err"></div>
+
+            <label>Password</label>
+            <input
+                id="si-password"
+                name="password"
+                type="password"
+                placeholder="Enter your password"
+            />
+            <div class="error-msg" id="si-password-err"></div>
+
+            <button type="submit" class="signin-btn">Sign in</button>
+
+            <p
+                style="
+                    margin-top: 12px;
+                    font-size: 13px;
+                    text-align: center;
+                    color: #666;
+                "
+            >
+                Don't have an account? <a href="signup.html">Sign up</a>
+            </p>
+        </form>
+        <script src="auth.js"></script>
+    </body>
+</html>
