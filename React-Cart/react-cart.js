@@ -37,11 +37,11 @@ function formatPrice(value) {
 
 function CartApp() {
     const [cart, setCart] = useState(() => {
-        const savedCart = localStorage.getItem("react-demo-cart");
+        const savedCart = localStorage.getItem("react-demo");
         return savedCart ? JSON.parse(savedCart) : [];
     });
     const [theme, setTheme] = useState(() => {
-        const savedTheme = localStorage.getItem("react-demo-theme");
+        const savedTheme = localStorage.getItem("react-theme");
 
         if (savedTheme === "light" || savedTheme === "dark") {
             return savedTheme;
@@ -53,12 +53,12 @@ function CartApp() {
     });
 
     useEffect(() => {
-        localStorage.setItem("react-demo-cart", JSON.stringify(cart));
+        localStorage.setItem("react-demo", JSON.stringify(cart));
     }, [cart]);
 
     useEffect(() => {
         document.body.setAttribute("data-theme", theme);
-        localStorage.setItem("react-demo-theme", theme);
+        localStorage.setItem("react-theme", theme);
     }, [theme]);
 
     function addToCart(product) {
